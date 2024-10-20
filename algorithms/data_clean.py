@@ -1,9 +1,4 @@
 import pandas as pd
-# file_path = 'data/NJIT ICORPS NATIONAL AWARDS.xlsx'
-# df = pd.read_excel(file_path, skipfooter=11) # skipfooter = skip last 11 lines b/c its random notes
-# print(df)
-
-
 
 class BaseReader():
     def __init__(self):
@@ -66,8 +61,23 @@ class BaseReader():
             entry['batch'] = 'Fall 2015'
             # print(entry)
             contents.append(entry)
+
+        # finished 2015 sheet above
+        # try to replicate here for other sheets
+        # heres some psuedocode:
+
+        # read excel sheet (filename)
+        # loop thru rows:
+        #   create a new entry dict
+        #   store whatever you want, try to be consistent with the naming like above
+        # add entry object to contents list
+        # 
+        #
+        # do whatever stats you want in calculate_trends.py
             
         return contents
+    
+
         
 
 
