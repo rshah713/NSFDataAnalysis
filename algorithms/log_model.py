@@ -35,3 +35,5 @@ y_pred = model.predict(X_test)
 clean up the spreadsheet data and properly align columns, create dummy variables 
 for all independent varaibles, build linear regression model"""
 "run this when teseting out code in virtual environment: pip install pandas scikit-learn openpyxl"
+
+"rough goal for next week: finish the first draft for logistic model code, finish matching up the teams, and finish cleaning up the categories"
