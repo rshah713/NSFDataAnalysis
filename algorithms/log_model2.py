@@ -6,7 +6,7 @@ import pandas as pd
 										
 # run in virtual environment
 df = pd.read_excel("condensed_data.xlsx")
-df.drop_duplicates(keep='first')
+df = df.drop_duplicates(keep='first')
 df.columns = df.columns.str.strip()
 df = df.rename(columns={'(DV) Student \nGender': '(DV) Student Gender'})
 print(df[["NATIONALS", "(DV) Student Gender", "DV (Race)"]])
@@ -32,9 +32,9 @@ print("\nIntercept:")
 print("Likelihood of getting to nationals if both dummy values are 0 i.e. male nonHispanic")
 print(logreg.intercept_)
 print("Converting log_odds value to a probability using logistic function...")
-print("0.0343")
+print("0.0343") # why is it hardcoded?
 
-accuracy = accuracy_score(y_test, y_pred)
+accuracy = accuracy_score(y_test, y_pred) # must be balanced for accuracy to be a good metric
 print(f"\nAccuracy: {accuracy:.4f}")
 
 print("\nConfusion Matrix:")
