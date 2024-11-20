@@ -6,6 +6,7 @@ import pandas as pd
 										
 # run in virtual environment
 df = pd.read_excel("condensed_data.xlsx")
+df.drop_duplicates(keep='first')
 df.columns = df.columns.str.strip()
 df = df.rename(columns={'(DV) Student \nGender': '(DV) Student Gender'})
 print(df[["NATIONALS", "(DV) Student Gender", "DV (Race)"]])
