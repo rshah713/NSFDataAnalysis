@@ -24,10 +24,14 @@ logreg.fit(X_train, y_train)
 y_pred = logreg.predict(X_test)
 
 print("\nModel Coefficients (weights):")
+print("Gender (1=Female), Race(1=Hispanic)")
 print(logreg.coef_)
 
 print("\nIntercept:")
+print("Likelihood of getting to nationals if both dummy values are 0 i.e. male nonHispanic")
 print(logreg.intercept_)
+print("Converting log_odds value to a probability using logistic function...")
+print("0.0343")
 
 accuracy = accuracy_score(y_test, y_pred)
 print(f"\nAccuracy: {accuracy:.4f}")
@@ -35,8 +39,8 @@ print(f"\nAccuracy: {accuracy:.4f}")
 print("\nConfusion Matrix:")
 print(confusion_matrix(y_test, y_pred))
 
-print("\nClassification Report:")
-print(classification_report(y_test, y_pred))
+# print("\nClassification Report:")
+# print(classification_report(y_test, y_pred))
 
 
 
