@@ -3,6 +3,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
 
 import pandas as pd
+import numpy as np
 										
 # run in virtual environment
 df = pd.read_excel("condensed_data.xlsx")
@@ -10,6 +11,7 @@ df = df.drop_duplicates(keep='first')
 df.columns = df.columns.str.strip()
 df = df.rename(columns={'(DV) Student \nGender': '(DV) Student Gender'})
 print(df[["NATIONALS", "(DV) Student Gender", "DV (Race)"]])
+print(df['NATIONALS'].value_counts())
 #print(df.columns)
 
 feature_cols = ['(DV) Student Gender', 'DV (Race)']
@@ -39,6 +41,26 @@ print(f"\nAccuracy: {accuracy:.4f}")
 
 print("\nConfusion Matrix:")
 print(confusion_matrix(y_test, y_pred))
+print()
+
+# calculate t test statistic
+# invert 2nd derivative log likelihood function
+probs = logreg.predict_proba(X_train)
+
+X_train_np = X_train.to_numpy()
+
+# use Hessian matrix 
+# X.T * W * X
+W = np.diag((probs[:, 1] * (1 - probs[:, 1])))
+XTWX = np.dot(X_train_np.T, np.dot(W, X_train_np))
+cov_matrix = np.linalg.inv(XTWX) # invert it
+
+# recall t = coeffecient / standard error
+standard_errors = np.sqrt(np.diag(cov_matrix))
+coefficients = logreg.coef_[0]
+t_scores = coefficients / standard_errors
+print(f"{feature_cols[0]}: Coefficient = {coefficients[0]:.4f}, SE = {standard_errors[0]:.4f}, T-Stat = {t_scores[0]:.4f}")
+print(f"{feature_cols[1]}: Coefficient = {coefficients[1]:.4f}, SE = {standard_errors[1]:.4f}, T-Stat = {t_scores[1]:.4f}")
 
 # print("\nClassification Report:")
 # print(classification_report(y_test, y_pred))
