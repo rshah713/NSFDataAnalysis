@@ -18,6 +18,10 @@ feature_cols = ['(DV) Student Gender', 'DV (Race)', 'DV (Ethnicity)']
 X = df[feature_cols]
 y = df.NATIONALS
 
+
+# Check for missing values
+print(df.isna().sum())
+
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=16)
 
 logreg = LogisticRegression(random_state=16)
@@ -42,9 +46,6 @@ print(f"\nAccuracy: {accuracy:.4f}")
 print("\nConfusion Matrix:")
 print(confusion_matrix(y_test, y_pred))
 print()
-
-# Check for missing values
-print(df.isna().sum())
 
 # calculate t test statistic
 # invert 2nd derivative log likelihood function
