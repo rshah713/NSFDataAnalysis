@@ -43,6 +43,9 @@ print("\nConfusion Matrix:")
 print(confusion_matrix(y_test, y_pred))
 print()
 
+# Check for missing values
+print(df.isna().sum())
+
 # calculate t test statistic
 # invert 2nd derivative log likelihood function
 probs = logreg.predict_proba(X_train)
