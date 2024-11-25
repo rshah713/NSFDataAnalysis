@@ -10,7 +10,7 @@ df = pd.read_excel("condensed_data.xlsx")
 df = df.drop_duplicates(keep='first')
 df.columns = df.columns.str.strip()
 df = df.rename(columns={'(DV) Student \nGender': '(DV) Student Gender'})
-print(df[["NATIONALS", "(DV) Student Gender", "DV (Race)"], "DV (Ethnicity)"])
+print(df[["NATIONALS", "(DV) Student Gender", "DV (Race)", "DV (Ethnicity)"])
 print(df['NATIONALS'].value_counts())
 #print(df.columns)
 
