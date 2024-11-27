@@ -65,7 +65,7 @@ coefficients = logreg.coef_[0]
 t_scores = coefficients / standard_errors
 print(f"{feature_cols[0]}: Coefficient = {coefficients[0]:.4f}, SE = {standard_errors[0]:.4f}, T-Stat = {t_scores[0]:.4f}")
 print(f"{feature_cols[1]}: Coefficient = {coefficients[1]:.4f}, SE = {standard_errors[1]:.4f}, T-Stat = {t_scores[1]:.4f}")
-print(f"{feature_cols[2]}: Coefficient = {coefficients[1]:.4f}, SE = {standard_errors[1]:.4f}, T-Stat = {t_scores[1]:.4f}")
+print(f"{feature_cols[2]}: Coefficient = {coefficients[2]:.4f}, SE = {standard_errors[2]:.4f}, T-Stat = {t_scores[2]:.4f}")
 
 # print("\nClassification Report:")
 # print(classification_report(y_test, y_pred))
