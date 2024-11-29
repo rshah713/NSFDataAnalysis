@@ -69,6 +69,15 @@ print(f"{feature_cols[2]}: Coefficient = {coefficients[2]:.4f}, SE = {standard_e
 print(f"{feature_cols[3]}: Coefficient = {coefficients[3]:.4f}, SE = {standard_errors[3]:.4f}, T-Stat = {t_scores[3]:.4f}")
 print(f"{feature_cols[4]}: Coefficient = {coefficients[4]:.4f}, SE = {standard_errors[4]:.4f}, T-Stat = {t_scores[4]:.4f}")
 
+y_prob = logreg.predict_proba(X_train)[:, 1]  # Probabilities for the positive class
+log_likelihood_model = -np.sum(np.log(y_prob) * y_train + np.log(1 - y_prob) * (1 - y_train))
+
+y_prob_null = np.mean(y_train)  # Predicted probability for the null model (constant)
+log_likelihood_null = -np.sum(y_train * np.log(y_prob_null) + (1 - y_train) * np.log(1 - y_prob_null))
+
+pseudo_r2 = 1 - (log_likelihood_model / log_likelihood_null)
+print(f"\nMcFadden's Pseudo-R2: {pseudo_r2:.4f}")
+
 
 # print("\nClassification Report:")
 # print(classification_report(y_test, y_pred))
