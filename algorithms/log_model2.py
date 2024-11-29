@@ -10,19 +10,17 @@ df = pd.read_excel("condensed_data.xlsx")
 df = df.drop_duplicates(keep='first')
 df.columns = df.columns.str.strip()
 df = df.rename(columns={'(DV) Student \nGender': '(DV) Student Gender'})
-print(df[["NATIONALS", "(DV) Student Gender", "DV (Race)", "DV (Ethnicity)", "(DV) Experience"]])
+print(df[["NATIONALS", "(DV) Student Gender", "DV (Race)", "DV (Ethnicity)", "(DV) Experience", "(DV) Undergrad Status"]])
 print(df['NATIONALS'].value_counts())
 #print(df.columns)
 
-feature_cols = ['(DV) Student Gender', 'DV (Race)', 'DV (Ethnicity)', '(DV) Experience']
+feature_cols = ['(DV) Student Gender', 'DV (Race)', 'DV (Ethnicity)', '(DV) Experience', '(DV) Undergrad Status']
 X = df[feature_cols]
 y = df.NATIONALS
 
 
 # Check for missing values
 print(df.isna().sum())
-df['(DV) Experience'] = df['(DV) Experience'].fillna(0)
-
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=16)
 
@@ -33,11 +31,11 @@ logreg.fit(X_train, y_train)
 y_pred = logreg.predict(X_test)
 
 print("\nModel Coefficients (weights):")
-print("Gender (1=Female), Race(1=African American), Ethnicity(1=Hispanic), Experience(1 = no experience)")
+print("Gender (1=Female), Race(1=African American), Ethnicity(1=Hispanic), Experience(1 = no experience), Grad vs Undergrad(undergrad=0)")
 print(logreg.coef_)
 
 print("\nIntercept:")
-print("Likelihood of getting to nationals if all dummy values are 0 i.e. male nonHispanic nonBlack no experience")
+print("Likelihood of getting to nationals if all dummy values are 0 i.e. undergrad male nonHispanic nonBlack no experience")
 print(logreg.intercept_)
 print("Converting log_odds value to a probability using logistic function...")
 print("0.0343") # why is it hardcoded?
@@ -69,6 +67,7 @@ print(f"{feature_cols[0]}: Coefficient = {coefficients[0]:.4f}, SE = {standard_e
 print(f"{feature_cols[1]}: Coefficient = {coefficients[1]:.4f}, SE = {standard_errors[1]:.4f}, T-Stat = {t_scores[1]:.4f}")
 print(f"{feature_cols[2]}: Coefficient = {coefficients[2]:.4f}, SE = {standard_errors[2]:.4f}, T-Stat = {t_scores[2]:.4f}")
 print(f"{feature_cols[3]}: Coefficient = {coefficients[3]:.4f}, SE = {standard_errors[3]:.4f}, T-Stat = {t_scores[3]:.4f}")
+print(f"{feature_cols[4]}: Coefficient = {coefficients[4]:.4f}, SE = {standard_errors[4]:.4f}, T-Stat = {t_scores[4]:.4f}")
 
 
 # print("\nClassification Report:")
